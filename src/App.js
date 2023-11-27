@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { DataContext } from './contexts/DataContext'
 import SearchBar from './Components/SearchBar';
 import Gallery from './Components/Gallery/Gallery';
 
@@ -6,23 +7,6 @@ function App() {
   const [search, setSearch] = useState('')
   const [message, setMessage] = useState('Search for Music')
   const [data, setData] = useState([])
-  // https://itunes.apple.com/search?term=the%20grateful%20dead
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const url = encodeURI('https://itunes.apple.com/search?term=black%20sabbath')
-  //     console.log('url', url);
-  //     const response = await fetch(url)
-  //     const data = await response.json()
-  //     console.log(data);
-  //     if (data.results.length) {
-  //       setData(data)
-  //     } else {
-  //       setData([])
-  //       setMessage('Not found')
-  //     }
-  //   }
-  //   fetchData()
-  // }, [search])
 
   useEffect(() => {
     if (search) {
@@ -40,7 +24,7 @@ function App() {
       }
       fetchData()
     } else {
-      if(data) setData([])
+      if (data) setData([])
     }
 
   }, [search])
@@ -53,9 +37,12 @@ function App() {
     <div className="App">
       <SearchBar handleSearch={handleSearch} />
       {message}
-      <Gallery data={data} />
+      <DataContext.Provider value={data} >
+        <Gallery />
+      </DataContext.Provider>
     </div>
   );
+
 }
 
 export default App;
