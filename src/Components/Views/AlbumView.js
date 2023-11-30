@@ -3,16 +3,49 @@
 // component to serve specific data about a given album
 
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 function AlbumView() {
-    const [ albumData, setAlbumData ] = useState([])
+    const [albumData, setAlbumData] = useState([])
     const { id } = useParams()
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const url = `http://localhost:4000/song/${id}`
+            const response = await fetch(url)
+            const data = await response.json()
+            const songs = data.results.filter((item) => item.wrapperType === 'track')
+            // console.log(data);
+            console.log(songs);
+            setAlbumData(songs)
+        }
+        fetchData()
+    }, [id])
+    const songDisplay = albumData.map(song => {
+        return (
+            <div key={song.trackId}>
+                {/* <p>{album.collectionName}</p> */}
+                <p>{song.trackName}</p>
+
+            </div>
+        )
+    })
+
+    const navButtons = () => {
+        return (
+            <div>
+                <button onClick={() => navigate(-1)}>Back</button>
+                <button onClick={() => navigate('/')}>Home</button>
+            </div>
+        )
+    }
     return (
         <div>
             <p>Album Data Goes Here!</p>
+            {navButtons()}
             <p>ID: {id}</p>
+            {songDisplay}
         </div>
     )
 }
