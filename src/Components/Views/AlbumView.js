@@ -4,11 +4,11 @@
 
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import Buttons from '../Buttons'
 
 function AlbumView() {
     const [albumData, setAlbumData] = useState([])
     const { id } = useParams()
-    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,18 +32,11 @@ function AlbumView() {
         )
     })
 
-    const navButtons = () => {
-        return (
-            <div>
-                <button onClick={() => navigate(-1)}>Back</button>
-                <button onClick={() => navigate('/')}>Home</button>
-            </div>
-        )
-    }
+    
     return (
         <div>
             <p>Album Data Goes Here!</p>
-            {navButtons()}
+            <Buttons />
             <p>ID: {id}</p>
             {songDisplay}
         </div>

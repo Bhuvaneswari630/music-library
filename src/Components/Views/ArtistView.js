@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import Buttons from '../Buttons'
 
 function ArtistView() {
     const [artistData, setArtistData] = useState([])
@@ -34,6 +35,7 @@ function ArtistView() {
         <div>
             <p>Artist Data Goes Here!</p>
             <p>ID: {id}</p>
+            <Buttons />
             {albumDisplay}
         </div>
     )
