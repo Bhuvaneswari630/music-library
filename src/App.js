@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom';
+import { DataContext } from './contexts/DataContext'
 import SearchBar from './Components/SearchBar';
 import Gallery from './Components/Gallery/Gallery';
 import ArtistView from './Components/Views/ArtistView';
@@ -47,15 +43,18 @@ function App() {
           <Route path='/' element={
             <>
               <SearchBar handleSearch={handleSearch} />
-              <Gallery data={data} />
+              <DataContext.Provider value={data} >
+                <Gallery />
+              </DataContext.Provider>
             </>
           } />
           <Route path='/album/:id' element={<AlbumView />} />
           <Route path='/artist/:id' element={<ArtistView />} />
         </Routes>
       </Router>
-    </div>
+    </div >
   );
+
 }
 
 export default App;
