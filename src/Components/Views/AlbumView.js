@@ -3,7 +3,7 @@
 // component to serve specific data about a given album
 
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Buttons from '../Buttons'
 
 function AlbumView() {

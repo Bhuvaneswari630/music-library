@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom';
 import { DataContext } from './contexts/DataContext'
 import SearchBar from './Components/SearchBar';
 import Gallery from './Components/Gallery/Gallery';
